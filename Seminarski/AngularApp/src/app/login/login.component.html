@@ -1,0 +1,133 @@
+<section class="h-100 w-100 gradient-form" >
+
+  <div class="row d-flex justify-content-center align-items-center h-100 w-100">
+    <div class="col-xl-10">
+      <div class="card rounded-3 text-black">
+        <div class="row g-1">
+          <div class="col-lg-6">
+            <div class="card-body p-md-5 mx-md-4">
+
+              <div class="text-center">
+                <img src="https://t3.ftcdn.net/jpg/03/56/46/10/360_F_356461066_rUflx03xPKYXEGe36Ecslg2ilEnWsAHa.jpg"
+                     style="width: 200px;" alt="logo">
+                <h4 class="mt-1 mb-5 pb-1">OpenDoors</h4>
+              </div>
+
+
+              <form [formGroup]="LogInForma" (ngSubmit)="onSubmit()">
+
+                <div class="form-outline mb-4">
+                  <p> {{'Username'| translate}}</p>
+                  <input type="text" class="form-control" [(ngModel)]="this.korisnickoIme"
+                         formControlName="korisnickoIme">
+                  <div *ngIf="submitted && LogInForma.controls.korisnickoIme.errors" class="error">
+                    <div *ngIf="LogInForma.controls.korisnickoIme.errors?.['required']"> {{'Username'| translate}}{{'isReq'| translate}}
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-outline mb-4">
+                  <p> {{'Password'| translate}}</p>
+                  <input type="password" class="form-control" [(ngModel)]="this.lozinka" formControlName="lozinka"
+                         placeholder="*****">
+                  <div *ngIf="submitted && LogInForma.controls.lozinka.errors" class="error">
+                    <div *ngIf="LogInForma.controls.lozinka.errors?.['required']"> {{'Password'| translate}}{{'isReq'| translate}}</div>
+                  </div>
+                </div>
+
+                <div class="text-right pt-1 mb-5 pb-1">
+                  <button class="btn btn-primary w-100" type="click" (click)="onSubmit()">{{"Login"| translate}}</button>
+                </div>
+              </form>
+              <button class="btn btn-primary" style="margin-bottom: 5%; background-color: white; border:1px solid black;margin-left: 15%;: center;color:black " (click)="otvoriModal=true">{{'ForgotPass' | translate}}</button>
+
+              <div class="d-flex align-items-center justify-content-center pb-4">
+                <p class="mb-0 me-2">{{'NoAcc'| translate}}</p>
+                <button type="button" class="btn btn-outline-success"><a routerLink="/registracija" style="color:white">{{'Register'| translate}}</a></button>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 d-flex align-items-center" style="background-color: black">
+            <div class="text-white px-3 py-4 p-md-5 mx-md-4">
+              <h4 class="mb-4">OpenDoors</h4>
+              <p class="small mb-0">OpenDoors je aplikacija za iznajmljivanje nekretnina
+                koja korisnicima omogućava pregled i rezervaciju istih,
+                dok vlasnici imaju mogućnost postavljanja vlastitih nekretnina.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<div *ngIf="otvoriModal==true" class="modal fade show" id="exampleModalLive1" tabindex="-1"
+     aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog"
+     style="display: block;  margin-top: 10%; margin-bottom: 10%;margin-left: 5%">
+  <div class="modal-dialog">
+    <div class="modal-content" style="background-color: black;color: white">
+      <div class="modal-header">
+        <button type="button" class="btn-close btn-close-white" aria-label="Close" (click)="otvoriModal=false"></button>
+      </div>
+      <div class="modal-body">
+        <div>
+          <h5>{{'EmailV'| translate}} </h5>
+        </div>
+        <div>
+          <input class="form-control" [(ngModel)]="this.email" placeholder="someone@gmail.com">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-success" (click)="posaljiKod()">{{'Send'| translate}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="unesiKod==true" class="modal fade show" id="exampleModalLive2" tabindex="-1"
+     aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog"
+     style="display: block;  margin-top: 10%; margin-bottom: 10%;margin-left: 5%">
+  <div class="modal-dialog">
+    <div class="modal-content" style="background-color: black;color: white">
+      <div class="modal-header">
+        <button type="button" class="btn-close btn-close-white" aria-label="Close" (click)="unesiKod=false"></button>
+      </div>
+      <div class="modal-body">
+        <div>
+          <h5>{{"VerificationCode"| translate}}</h5>
+        </div>
+        <div>
+          <input class="form-control" [(ngModel)]="this.verifikacija">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-success" (click)="provjeriValidnost()">{{'Send'| translate}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="promjena==true" class="modal fade show" id="exampleModalLive3" tabindex="-1"
+     aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog"
+     style="display: block;  margin-top: 10%; margin-bottom: 10%;margin-left: 5%">
+  <div class="modal-dialog">
+    <div class="modal-content" style="background-color: black;color: white">
+      <div class="modal-header">
+        <button type="button" class="btn-close btn-close-white" aria-label="Close" (click)="promjena=false"></button>
+      </div>
+      <div class="modal-body">
+        <div>
+          <h5>{{'NewPass'| translate}}</h5>
+        </div>
+        <div>
+          <input type="password" class="form-control" [(ngModel)]="this.novaLozinka">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-success" (click)="NovaLozinka()">{{'Change'| translate}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+

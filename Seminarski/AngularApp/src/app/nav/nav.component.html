@@ -1,0 +1,84 @@
+<div *ngIf="!loginInfo().isLogiran">
+  <nav class="navbar navbar-expand-lg navbar-light" style="background-color: cadetblue;">
+    <div class="container">
+      <a class="navbar-brand">{{appTitle}}</a>
+      <form class="form-inline" style="margin-left: 35%">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="item nav-link active"  routerLink="/nekretnine/{{0}}">{{'Homepage'| translate}}</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link active"  routerLink="/kategorija">{{'Categories'| translate}}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active"  aria-current="page" routerLink="/pomoc">{{'Help'| translate}}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active"  routerLink="/login">{{'Login'| translate}}</a>
+          </li>
+          <li>
+
+          </li>
+        </ul>
+      </form>
+      <a class="nav-link active" >
+        <select
+          class="form-control" style="background-color: rgb(53,53,53);color: white;height:1%;margin-left:80%"
+          #selectedLang
+          (change)="switchLang(selectedLang.value)">
+          <option *ngFor="let language of translate.getLangs()"
+                  [value]="language"
+                  [selected]="language === translate.currentLang">
+            {{language}}
+          </option>
+        </select>
+      </a>
+    </div>
+  </nav>
+</div>
+
+<div *ngIf="loginInfo().isLogiran">
+  <nav class="navbar navbar-expand-lg navbar-light" style="background-color: cadetblue;">
+    <div class="container">
+      <a class="navbar-brand">{{appTitle}}</a>
+      <form class="form-inline" style="margin-left: 35%">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link active" routerLink="/nekretnine/{{0}}">{{'Homepage'| translate}}</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link active" routerLink="/kategorija">{{'Categories'| translate}}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" routerLink="/pomoc">{{'Help'| translate}}</a>
+          </li>
+          <div class="dropdown dropdown-menu-right" >
+            <button class="btn fa-lg dropdown-toggle"  type="button" data-toggle="dropdown">
+              <i class="bi-person-fill pe-2" style="font-size: 1.25em;"></i></button>
+            <ul class="dropdown-menu dropdown-menu-right">
+              <li><a routerLink="/korisnicki-profil" style="color:black;"> <i class="bi-person-circle pe-2" style="font-size: 1.25em;margin-left: 5%;"> </i>{{'MyProfile'| translate}}</a></li>
+              <li>
+                <button style="border: none;background-color: white;color:black; margin-left: 3%" (click)="logOut()"><i class="bi-box-arrow-down-right pe-2 " style="font-size: 1.25em"> </i>{{'Logout'| translate}}</button>
+              </li>
+            </ul>
+          </div>
+
+        </ul>
+      </form>
+
+        <a class="nav-link active" >
+          <select
+            class="form-control" style="background-color: rgb(53,53,53);color: white;height:1%;margin-left:80%"
+            #selectedLang
+            (change)="switchLang(selectedLang.value)">
+            <option *ngFor="let language of translate.getLangs()"
+                    [value]="language"
+                    [selected]="language === translate.currentLang">
+              {{language}}
+            </option>
+          </select>
+        </a>
+
+    </div>
+  </nav>
+</div>

@@ -1,0 +1,23 @@
+.Kuca{
+
+  left: 0;
+  position: fixed;
+}
+
+.Stan{
+
+  right: 0;
+  position: fixed;
+}
+.Sve{
+
+  right: auto;
+  margin-left:23%;
+  position: fixed;
+}
+
+img{
+  margin-top:5%;
+  height:60%;
+  width:30%;
+}

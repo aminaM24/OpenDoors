@@ -1,0 +1,146 @@
+<section class=" h-100" style="background-color: rgb(53,53,53); border-radius: 20px;padding: 2%">
+  <h1>{{'Register'| translate}}: </h1> <br>
+  <form [formGroup]="register" (ngSubmit)="collect()">
+    <div class="row">
+      <div class="col-md-6 mb-4">
+        <div class="form-group">
+          <label>{{'Name'| translate}}:</label>
+          <input type="text" class="form-control" placeholder="{{'Name'| translate}}" formControlName="ime">
+          <div class="form-text text-danger" *ngIf="ime.errors?.['required'] && (ime.dirty || ime.touched)">
+            {{'Name'| translate}}{{'isReq'| translate}}
+          </div>
+          <div class="form-text text-danger" *ngIf="ime.errors?.['minlength'] && (ime.dirty || ime.touched)">
+            {{'Name'| translate}}{{'Short'| translate}}.
+             {{'Min'| translate}} 2 {{'Char'| translate}}.
+          </div>
+          <div class="form-text text-danger" *ngIf="ime.errors?.['pattern'] && (ime.dirty || ime.touched)">
+            {{'Name'| translate}}{{'MustStart'| translate}} {{'Char'| translate}} and {{'CantInclude'| translate}} {{'Num'| translate}}.
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 mb-4">
+        <div class="form-group">
+          <label>{{'Surname'| translate}}:</label>
+          <input type="text" class="form-control" placeholder="{{'Surname'| translate}}"  formControlName="prezime">
+          <div class="form-text text-danger" *ngIf="prezime.errors?.['required'] && (prezime.dirty || prezime.touched)">{{'Surname'| translate}}{{'isReq'| translate}}
+          </div>
+          <div class="form-text text-danger" *ngIf="!!prezime.errors?.['minlength'] && (prezime.dirty || prezime.touched)">
+            {{'Surname'| translate}}{{'Short'| translate}}.
+             {{'Min'| translate}} 2 {{'Char'| translate}}.
+          </div>
+          <div class="form-text text-danger" *ngIf="prezime.errors?.['pattern'] && (prezime.dirty || prezime.touched)">
+            {{'Surname'| translate}}{{'MustStart'| translate}} {{'Char'| translate}} and {{'CantInclude'| translate}} {{'Num'| translate}}.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 mb-4">
+        <div class="m-1" style="color: white">{{'Gender'| translate}}:</div>
+        <div class="form-check form-check-inline">
+          <input type="radio" class="form-check-input" value="M" id="male" formControlName="spol">
+          <label class="form-check-label" for="male">{{'M'| translate}}</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="radio" class="form-check-input" value="Ž" id="female" formControlName="spol">
+          <label class="form-check-label" for="female">{{'F'| translate}}</label>
+        </div>
+        <div class="form-text text-danger" *ngIf="spol.errors?.['required']">{{'Gender'| translate}} {{'isReq'| translate}}</div>
+      </div>
+      <div class="col-md-6 mb-4">
+        <div class="form-group">
+          <label>{{'BirthYear'| translate}}:</label>
+          <input type="number" class="form-control" placeholder="{{'BirthYear'| translate}}"  formControlName="godinaRodjenja">
+          <div class="form-text text-danger" *ngIf="godinaRodjenja.errors?.['required'] && (godinaRodjenja.dirty || godinaRodjenja.touched)">
+            {{'BirthYear'| translate}}{{'isReq'| translate}}.
+          </div>
+          <div class="form-text text-danger" *ngIf="!!godinaRodjenja.errors?.['pattern'] && (godinaRodjenja.dirty || godinaRodjenja.touched)">
+            {{'NotValid'| translate}}.
+          </div>
+          <div class="form-text text-danger" *ngIf="!!godinaRodjenja.errors?.['min'] || godinaRodjenja.errors?.['max']">+
+
+            {{'Min'| translate}} 1955, {{'Max'| translate}} 2004.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 mb-4">
+        <div class="form-group">
+          <label>{{'PhoneNum'| translate}}:</label>
+          <input type="text" class="form-control" placeholder="000/000-0000"  formControlName="brojTelefona">
+          <div class="form-text text-danger" *ngIf="brojTelefona.errors?.['required'] && (brojTelefona.dirty || brojTelefona.touched)">
+            {{'PhoneNum'| translate}}{{'isReq'| translate}}.
+          </div>
+          <div class="form-text text-danger" *ngIf="!!brojTelefona.errors?.['pattern'] && (brojTelefona.dirty || brojTelefona.touched)">
+            {{'NotValid'| translate}}.
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 mb-4">
+        <div class="form-group">
+          <label>Email:</label>
+          <input type="text" class="form-control" placeholder="someone@gmail.com" formControlName="email">
+          <div class="form-text text-danger" *ngIf="email.errors?.['required'] && (email.dirty || email.touched)">
+            Email{{'isReq'| translate}}.
+          </div>
+          <div class="form-text text-danger" *ngIf="!!email.errors?.['email'] && (email.dirty || email.touched)">
+            {{'NotValid'| translate}}.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 mb-4">
+        <div class="form-group">
+
+          <label>{{'Username'| translate}}:</label>
+          <input type="text" class="form-control" placeholder="{{'Username'| translate}}"  formControlName="username">
+          <div class="form-text text-danger" *ngIf="username.errors?.['required'] && (username.dirty || username.touched)">
+            {{'Username'| translate}}{{'isReq'| translate}}
+          </div>
+          <div class="form-text text-danger" *ngIf="username.errors?.['pattern'] && (username.dirty || username.touched)">
+            {{'NotValid'| translate}}
+          </div>
+          <div class="form-text text-danger" *ngIf="username.errors?.['minlength'] && (username.dirty || username.touched)">
+            {{'Min'| translate}} 6 {{'Char'| translate}}
+          </div>
+          <div class="form-text text-danger" *ngIf="username.errors?.['maxlength'] && (username.dirty || username.touched)">
+            {{'Min'| translate}} 15 {{'Char'| translate}}
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 mb-4">
+        <div class="form-group">
+          <label>{{'Password'| translate}}:</label>
+          <input type="password" class="form-control" id="password" placeholder="{{'Password'| translate}}" formControlName="password">
+          <div class="form-text text-danger" *ngIf="password.errors?.['required'] &&
+     (password.dirty || password.touched)">{{'Password'| translate}}{{'isReq'| translate}}
+          </div>
+          <div class="form-text text-danger" *ngIf="password.errors?.['minlength'] || password.errors?.['maxlength'] &&
+    (password.dirty || password.touched)">
+            {{'Min'| translate}} 6 {{'Char'| translate}}, {{'Max'| translate}} 15 {{'Char'| translate}}
+          </div>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="slika-input" class="form-label" style="color: white">{{'Photo'| translate}}: </label>
+        <input class="form-control" formControlName="slikaKorisnika" id="slika-input" type="file" accept="image/*"
+               (change)="generisiPreview()"/>
+        <div style="color:darkred; font-weight: bold" *ngIf="register.controls['slikaKorisnika'].invalid && (register.controls['slikaKorisnika'].dirty || register.controls['slikaKorisnika'].touched)">
+          <div class="form-text text-danger" *ngIf="slikaKorisnika.errors?.['required'] &&
+     (slikaKorisnika.dirty || slikaKorisnika.touched)">{{'Photo'| translate}}{{'isReq'| translate}}
+          </div>
+        </div>
+        <img [src]="slikab64" style="width: 410px;height:440px">
+      </div>
+      <form>
+        <label>{{'Owner'| translate}}: </label>
+        <input id="avans" type="checkbox" (change)="promjenaVlasnika($event)">
+      </form>
+    </div>
+    <button type="submit" class="btn btn-info" style="background-color: white; margin-left: 88%" >{{'Register'| translate}}</button>
+
+  </form>
+</section>
+

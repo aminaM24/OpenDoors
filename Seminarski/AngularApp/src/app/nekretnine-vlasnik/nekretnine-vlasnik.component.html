@@ -1,0 +1,26 @@
+<button style="margin-left: 90%;padding:0.7%;" type="button" class="btn btn-dark" *ngIf="loginInfo().autentifikacijaToken.korisnickiNalog.isVlasnik" >
+  <a routerLink="/add-nekretnina" style="text-decoration: none;color: white">{{'AddReal'| translate}}</a></button>
+<div class="row">
+  <div class="col-md-4 ml-auto" *ngFor="let s of nekretninaVlasnikPodaci"
+       style="background-color: white;  width:47%; margin-top:1%;padding: 2%">
+    <div class="row ">
+      <div class="col-6">
+        <tr><img style="width: 90%;height:70%" [src]="getslika(s.slike_ids[0])"></tr>
+        <tr>{{s.adresa}}, {{s.lokacija}}</tr>
+      </div>
+      <div class="col-6">
+        <tr>{{s.brojKvadrata}} {{'SquareFootage'| translate}}</tr>
+        <tr>{{s.brojSoba}} {{'Rooms'| translate}}</tr>
+        <tr>{{s.brojKupatila}} {{'Restrooms'| translate}}</tr>
+        <tr>{{s.brojKreveta}} {{'Beds'| translate}}</tr>
+        <tr>{{s.cijenaPoDanu}} KM {{'Price'| translate}} {{'PerDay'| translate}}</tr>
+        <tr>{{'Advance'| translate}}: {{s.avans ? "Da" : "Ne"}}</tr>
+        <tr>
+          <button class="btn btn-info" (click)="detaljiNekretnine(s)">{{'Details'| translate}}</button>
+        </tr>
+      </div>
+    </div>
+  </div>
+</div>
+
+

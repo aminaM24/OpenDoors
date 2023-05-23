@@ -1,0 +1,41 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+@import "~bootstrap/dist/css/bootstrap.min.css";
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500&display=swap');
+
+body, html {
+  height: 100%;
+  margin: 0 auto;
+}
+
+body{
+  font-size: 18px;
+  font-family: 'Quicksand', sans-serif;
+  background-position: center;
+  background-size: cover;
+  background-image: url("./assets/Images/background.jpg");
+}
+
+
+a {
+  text-decoration: none;
+}
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+  padding: 1.3em;
+  display: grid;
+  grid-template-columns: 30% auto;}
+
+
+.btn{
+  border-radius: 18px;
+}
+
+section {
+  width: 80%;
+  margin: 0 auto;
+  padding-top: 2rem;
+}

@@ -1,0 +1,10 @@
+label,h1{
+  color:white;
+}
+.btn{
+  border-radius: 18px;
+  color:rgb(53,53,53);
+  background-color:white;
+  border:none;
+}
+

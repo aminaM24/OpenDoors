@@ -1,0 +1,140 @@
+<section class="h-100" style="background-color: rgb(53,53,53); border-radius: 20px; color: white; padding: 2%">
+  <form [formGroup]="register" (ngSubmit)="collect()">
+    <div class="row">
+      <div class="col-md-6 mb-4">
+        <div class="form-group">
+          <label>{{'Adults'| translate}}: </label>
+          <input type="number" class="form-control" placeholder="{{'Adults'| translate}}"  formControlName="brojOsoba"
+                 [min]="1">
+          <div class="form-text text-danger"
+               *ngIf="brojOsoba.errors?.['required'] && (brojOsoba.dirty || brojOsoba.touched)">
+            {{'Adults'| translate}}{{'isReq'| translate}}
+          </div>
+
+        </div>
+      </div>
+      <div class="col-md-6 mb-4">
+        <div class="form-group">
+          <label>{{'Children'| translate}}:</label>
+          <input type="number" class="form-control" placeholder="{{'Children'| translate}}"  formControlName="djeca" [min]="0">
+          <div class="form-text text-danger" *ngIf="djeca.errors?.['required'] && (djeca.dirty || djeca.touched)">
+            {{'Children'| translate}}{{'isReq'| translate}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 mb-4">
+        <div class="form-group">
+          <label>{{'CheckIn'| translate}}:</label>
+          <input type="date" class="form-control" formControlName="checkIn" [min]="minDate">
+          <div class="form-text text-danger" *ngIf="checkIn.errors?.['required'] && (checkIn.dirty || checkIn.touched)">
+            {{'CheckIn'| translate}}{{'isReq'| translate}}
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 mb-4">
+        <div class="form-group">
+          <label>{{'CheckOut'| translate}}:</label>
+          <input type="date" class="form-control" formControlName="checkOut" [min]="register.controls['checkIn'].value">
+          <div class="form-text text-danger"
+               *ngIf="checkOut.errors?.['required'] && (checkOut.dirty || checkOut.touched)">
+            {{'CheckOut'| translate}}{{'isReq'| translate}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+    <div class="col-md-6 mb-4">
+      <div class="form-group">
+        <label class="form-label">{{'Card'| translate}}: </label>
+        <select type="number" class="form-control" formControlName="kreditnaKarticaId">
+          <option *ngFor="let x of kreditnaKarticaPodaci" [ngValue]="x.id">{{x.tipKartice}}-{{x.brojKartice}}</option>
+        </select>
+        <div class="form-text text-danger"
+             *ngIf="kreditnaKarticaId.errors?.['required'] && (kreditnaKarticaId.dirty || kreditnaKarticaId.touched)">
+          {{'Choose'| translate}}{{'Card'| translate}}e{{'isReq'| translate}}
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 mb-4">
+      <button style="margin-top:7%" class="btn btn-outline-info" (click)="otvoriModal()">{{'NewCard'| translate}}</button>
+    </div>
+    </div>
+    <button  type="submit" class="btn btn-info">{{'Reserve'| translate}}</button>
+    <button  type="button" class="btn btn-danger"><a routerLink="/detalji-nekretnine/{{nekretnina}}" style="text-decoration: none;color:black;">{{'Cancel'| translate}}</a></button>
+  </form>
+</section>
+
+
+<div *ngIf="uplata!=null" class="modal fade show bd-example-modal-xl" id="exampleModalLive2" tabindex="-1"
+     aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog"
+     style="display: block; margin-left: 25%; width:50%;">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content" style="background-color: rgb(53,53,53); color: white;">
+      <div class="modal-header">
+        <button type="button" class="btn btn-close btn-close-white" aria-label="Close" (click)="uplata=null"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="uplata" (ngSubmit)="spasiKarticu()">
+          <div class="row">
+            <div class="col-md-6 mb-4">
+              <div class="form-group">
+                <label class="form-label">{{'CardType'| translate}}:</label>
+                <select class="form-control" formControlName="tipKartice">
+                  <option *ngFor="let x of tipoviKartice" [value]="x.naziv">{{x.naziv}}</option>
+                </select>
+                <div class="form-text text-danger"
+                     *ngIf="tipKartice.errors?.['required'] && (tipKartice.dirty || tipKartice.touched)">
+                  {{'CardType'| translate}}{{'isReq'| translate}}
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 mb-4">
+              <div class="form-group">
+                <label>{{'CardNum'| translate}}:</label>
+                <input type="text" class="form-control" placeholder="{{'XXXX XXXX XXXXX'| translate}}"
+                       formControlName="brojKartice">
+                <div class="form-text text-danger"
+                     *ngIf="brojKartice.errors?.['required'] && (brojKartice.dirty || brojKartice.touched)">
+                  {{'CardNum'| translate}}{{'isReq'| translate}}
+                </div>
+                <div class="form-text text-danger" *ngIf="brojKartice.errors?.['minlength'] && (brojKartice.dirty || brojKartice.touched)">
+                  {{'Min'| translate}} 12 {{'Char'| translate}}
+                </div>
+                <div class="form-text text-danger" *ngIf="brojKartice.errors?.['maxlength'] && (brojKartice.dirty || brojKartice.touched)">
+                  {{'Min'| translate}} 16 {{'Char'| translate}}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 mb-4">
+              <div class="form-group">
+                <label>{{'ExpDate'| translate}}:</label>
+                <input type="date" class="form-control" formControlName="datumIsteka" [min]="minDate">
+                <div class="form-text text-danger"
+                     *ngIf="datumIsteka.errors?.['required'] && (datumIsteka.dirty || datumIsteka.touched)">
+                  {{'ExpDate'| translate}}{{'isReq'| translate}}
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 mb-4">
+              <div class="form-group">
+                <label>CVV: </label>
+                <input type="number" class="form-control" formControlName="CVV" placeholder="XXX" >
+                <div class="form-text text-danger" *ngIf="CVV.errors?.['required'] && (CVV.dirty || CVV.touched)">
+                  CVV{{'isReq'| translate}}.
+                </div>
+                <div class="form-text text-danger" *ngIf="CVV.errors?.['pattern'] && (CVV.dirty || CVV.touched)">
+                 CVV {{'MustHave'| translate}} 3 {{'Num'| translate}} {{'Correct'| translate}}.
+                </div>
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-info">{{'Save'| translate}}</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
